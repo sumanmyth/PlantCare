@@ -1,4 +1,3 @@
-# app/schemas/response.py
 from pydantic import BaseModel
 
 class DiseasePredictionResponse(BaseModel):

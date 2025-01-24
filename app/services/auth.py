@@ -8,7 +8,6 @@ from app.schemas.user import UserCreate, UserLogin
 from app.core.db import get_db
 from fastapi import HTTPException
 from app.core.mail import send_email
-
 import os
 import httpx
 from fastapi import HTTPException
@@ -97,8 +96,7 @@ def reset_password(db: Session, token: str, new_password: str):
     
     except JWTError:
         raise HTTPException(status_code=401, detail="Invalid token")
-
-
+    
 
 GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
 GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
@@ -160,3 +158,6 @@ async def handle_google_callback(code: str, db: Session):
     except jwt.InvalidTokenError:
         raise HTTPException(status_code=400, detail="Invalid token")
 
+def logout_user(db: Session, token: str):
+    # This is where you'd add logic to handle token invalidation or blacklisting.
+    return {"message": "Logged out successfully"}
